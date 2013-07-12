@@ -3,7 +3,7 @@ require 'get_a_repo'
 describe GetRepo do
 
   before :each do
-    @dirname = "wwt-rocks"
+    @dirname = "test_dir"
     @get_repo = GetRepo.new("https://github.com/myappleguy/automation_test_repo.git", @dirname)
   end
 
