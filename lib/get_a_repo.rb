@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 class GetRepo
   require 'terminal-notifier'
   attr_reader :url, :directory
@@ -8,7 +10,10 @@ class GetRepo
   end
 
   def clone
-    FileUtils.remove_dir(@directory) if Dir.exists? @directory
+    if Dir.exists? @directory
+      puts "Removing Directory: #{@directory}"
+      FileUtils.remove_dir(@directory)
+    end
     `git clone #{@url} #{@directory}`
     if (Dir.exists?(@directory) && !Dir.entries(@directory).empty?)
       TerminalNotifier.notify("The repo was cloned into #{@directory}", title:"GetRepo")
