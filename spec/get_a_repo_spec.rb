@@ -15,20 +15,12 @@ describe GetRepo do
     @get_repo.directory.should == @dirname
   end
 
-  describe "#clone_it" do
-  end
-
-  describe "#repository_exists?" do
-    it "returns true if the dir exists" do
-      FileUtils.mkdir @dirname unless Dir.exists? @dirname
-      @get_repo.repository_exists?(@dirname).should == true
-      FileUtils.remove_dir @dirname
-    end
-
-    it "returns false if the dir doesnt exist" do
-      FileUtils.remove_dir @dirname if Dir.exists? @dirname
-      @get_repo.repository_exists?(@dirname).should == false
+  describe "#clone" do
+    it "clones the repo into the specified directory" do
+      FileUtils.remove_dir(@dirname) if Dir.exists?(@dirname)
+      @get_repo.clone
+      Dir.entries(@dirname).should_not == []
+      FileUtils.remove_dir(@dirname)
     end
   end
-
 end
